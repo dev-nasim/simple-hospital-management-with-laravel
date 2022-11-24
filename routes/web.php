@@ -17,10 +17,39 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/',[HomeController::class,'index']);
 
-Route::get('/home',[HomeController::class,'redirect']);
+Route::get('/home',[HomeController::class,'redirect'])->middleware('auth','verified');
 
+
+//===========================================================================
+//                        For Admin Doctor Part
+//===========================================================================
 Route::get('/add_doctor',[AdminController::class,'add_doctor']);
+Route::get('/all_doctor',[AdminController::class,'all_doctor']);
+Route::get('/update_doctor/{id}',[AdminController::class,'update_doctor']);
+Route::post('/edit_doctor/{id}',[AdminController::class,'edit_doctor']);
+Route::get('/delete_doctor/{id}',[AdminController::class,'delete_doctor']);
 Route::post('/upload_doctor',[AdminController::class,'upload']);
+
+
+//===========================================================================
+//                        For Admin Appointment
+//===========================================================================
+Route::get('/show_appointment',[AdminController::class,'show_appointment']);
+Route::get('/approved/{id}',[AdminController::class, 'approved']);
+Route::get('/canceled/{id}',[AdminController::class, 'canceled']);
+
+Route::get('/emailview/{id}',[AdminController::class,'emailview']);
+Route::post('/send_email/{id}',[AdminController::class,'send_email']);
+
+
+
+//===========================================================================
+//                        For User Appointment
+//===========================================================================
+Route::post('/appointment',[HomeController::class, 'appointment']);
+Route::get('/myappointment',[HomeController::class, 'myappointment']);
+Route::get('/cancel_appoint/{id}',[HomeController::class, 'cancel_appoint']);
+
 
 
 
